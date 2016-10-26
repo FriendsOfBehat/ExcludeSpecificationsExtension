@@ -51,7 +51,7 @@ class SkipAwareHookableFeatureTester implements SpecificationTester
      */
     public function test(Environment $env, $spec, $skip)
     {
-        if ($this->shouldFeatureBeSkipped($spec->getPath())) {
+        if ($this->shouldFeatureBeSkipped($spec->getFile())) {
             $skip = true;
         }
 
