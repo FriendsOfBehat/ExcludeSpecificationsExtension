@@ -7,28 +7,18 @@
  * file that was distributed with this source code.
  */
 
-namespace SkipExtension\ServiceContainer;
+namespace FriendsOfBehat\SkipExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use SkipExtension\Tester\SkipAwareHookableFeatureTester;
+use FriendsOfBehat\SkipExtension\Tester\SkipAwareHookableFeatureTester;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
- */
-class SkipExtension implements Extension
+final class SkipExtension implements Extension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function process(ContainerBuilder $container)
-    {
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -74,5 +64,12 @@ class SkipExtension implements Extension
         );
 
         $container->setDefinition('tester.specification.wrapper.hookable.decorating', $definition);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function process(ContainerBuilder $container)
+    {
     }
 }
