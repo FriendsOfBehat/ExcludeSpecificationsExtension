@@ -1,4 +1,4 @@
 /vendor
+/composer.lock
 
 /behat.yml
-/composer.lock
