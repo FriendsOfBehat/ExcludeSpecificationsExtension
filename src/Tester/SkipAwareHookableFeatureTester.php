@@ -7,16 +7,13 @@
  * file that was distributed with this source code.
  */
 
-namespace SkipExtension\Tester;
+namespace FriendsOfBehat\SkipExtension\Tester;
 
 use Behat\Testwork\Environment\Environment;
 use Behat\Testwork\Tester\Result\TestResult;
 use Behat\Testwork\Tester\SpecificationTester;
 
-/**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
- */
-class SkipAwareHookableFeatureTester implements SpecificationTester
+final class SkipAwareHookableFeatureTester implements SpecificationTester
 {
     /**
      * @var SpecificationTester
