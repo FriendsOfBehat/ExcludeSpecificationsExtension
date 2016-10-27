@@ -1,23 +1,23 @@
 {
-  "name": "friends-of-behat/skip-extension",
-  "description": "Allows to skip features and scenarios in Behat tests",
-  "license": "MIT",
-  "authors": [
-      {
-          "name": "Mateusz Zalewski",
-          "homepage": "http://mpzalewski.com.pl"
-      }
-  ],
-  "require": {
-      "php": "^5.6|^7.0",
+    "name": "friends-of-behat/skip-extension",
+    "description": "Allows to skip features and scenarios in Behat tests.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mateusz Zalewski",
+            "homepage": "http://mpzalewski.com.pl"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
 
-      "behat/behat": "^3.1",
-      "symfony/dependency-injection":  "~2.8||~3.0"
-  },
-  "require-dev": {
-      "friends-of-behat/test-context": "^0.2.0"
-  },
-  "autoload": {
-      "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
-  }
+        "behat/behat": "^3.1",
+        "symfony/dependency-injection": "^2.8|^3.0"
+    },
+    "require-dev": {
+        "friends-of-behat/test-context": "^0.2"
+    },
+    "autoload": {
+        "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
+    }
 }
