@@ -8,7 +8,7 @@ Feature: Skipping single feature file
         """
         default:
             extensions:
-                SkipExtension:
+                FriendsOfBehat\SkipExtension:
                     features:
                         - "features/skip.feature"
         """
