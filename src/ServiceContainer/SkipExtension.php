@@ -58,7 +58,8 @@ final class SkipExtension implements Extension
     {
         $definition = new Definition(FilesystemFeatureLocator::class, array(
             new Reference('gherkin'),
-            '%paths.base%'
+            '%paths.base%',
+            $config['features']
         ));
         $definition->addTag(SpecificationExtension::LOCATOR_TAG, array('priority' => 60));
         $container->removeDefinition(SpecificationExtension::LOCATOR_TAG . '.filesystem_feature');

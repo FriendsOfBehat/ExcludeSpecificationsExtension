@@ -19,19 +19,27 @@ final class FilesystemFeatureLocator implements SpecificationLocator
      * @var Gherkin
      */
     private $gherkin;
+
     /**
      * @var string
      */
     private $basePath;
 
     /**
+     * @var array
+     */
+    private $skipConfiguration;
+
+    /**
      * @param Gherkin $gherkin
      * @param string $basePath
+     * @param array $skipConfiguration
      */
-    public function __construct(Gherkin $gherkin, $basePath)
+    public function __construct(Gherkin $gherkin, $basePath, array $skipConfiguration)
     {
         $this->gherkin = $gherkin;
         $this->basePath = $basePath;
+        $this->skipConfiguration = $skipConfiguration;
     }
 
     /**
@@ -127,6 +135,10 @@ final class FilesystemFeatureLocator implements SpecificationLocator
 
         $paths = array_map('strval', iterator_to_array($iterator));
         uasort($paths, 'strnatcasecmp');
+
+        foreach ($this->skipConfiguration as $featureToSkip) {
+            unset($paths[$this->basePath.'/'.$featureToSkip]);
+        }
 
         return $paths;
     }
