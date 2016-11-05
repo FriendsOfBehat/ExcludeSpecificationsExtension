@@ -43,12 +43,10 @@ Feature: Skipping single feature file
                 When I do nothing
         """
 
-    Scenario: Seeing information about skipped features
+    Scenario: Seeing information not containing skipped features
         When I run Behat
-        Then it should fail with:
+        Then it should pass with:
         """
-        --- Skipped scenarios:
-
-            features/skip.feature
+        1 scenario (1 passed)
         """
 
