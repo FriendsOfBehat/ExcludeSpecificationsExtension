@@ -11,8 +11,6 @@
 
 namespace FriendsOfBehat\SkipExtension\Iterator;
 
-use Behat\Gherkin\Node\FeatureNode;
-
 final class SkipAwareFeatureIterator extends \FilterIterator
 {
     /**
@@ -30,11 +28,8 @@ final class SkipAwareFeatureIterator extends \FilterIterator
      * @param array $skipConfiguration
      * @param string $basePath
      */
-    public function __construct(
-        \Iterator $iterator,
-        array $skipConfiguration,
-        $basePath
-    ) {
+    public function __construct(\Iterator $iterator, array $skipConfiguration, $basePath)
+    {
         parent::__construct($iterator);
 
         $this->skipConfiguration = $skipConfiguration;
