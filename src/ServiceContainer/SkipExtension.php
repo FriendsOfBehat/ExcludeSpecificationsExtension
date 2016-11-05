@@ -14,7 +14,7 @@ namespace FriendsOfBehat\SkipExtension\ServiceContainer;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Behat\Testwork\Specification\ServiceContainer\SpecificationExtension;
-use FriendsOfBehat\SkipExtension\Locator\FilesystemFeatureLocator;
+use FriendsOfBehat\SkipExtension\Locator\SkipAwareFilesystemFeatureLocator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -56,13 +56,12 @@ final class SkipExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $definition = new Definition(FilesystemFeatureLocator::class, array(
+        $definition = new Definition(SkipAwareFilesystemFeatureLocator::class, array(
             new Reference('gherkin'),
             '%paths.base%',
             $config['features']
         ));
         $definition->addTag(SpecificationExtension::LOCATOR_TAG, array('priority' => 60));
-        $container->removeDefinition(SpecificationExtension::LOCATOR_TAG . '.filesystem_feature');
         $container->setDefinition(SpecificationExtension::LOCATOR_TAG . '.filesystem_feature', $definition);
     }
 

@@ -13,7 +13,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
 
-final class FilesystemFeatureLocator implements SpecificationLocator
+final class SkipAwareFilesystemFeatureLocator implements SpecificationLocator
 {
     /**
      * @var Gherkin
