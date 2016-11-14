@@ -26,7 +26,7 @@ final class SkipExtension implements Extension
      */
     public function getConfigKey()
     {
-        return 'skip';
+        return 'fob_skip';
     }
 
     /**
@@ -56,14 +56,12 @@ final class SkipExtension implements Extension
     public function load(ContainerBuilder $container, array $config)
     {
         $definition = new Definition(SkipAwareSpecificationLocator::class, [
-            new Reference('specifications.locator.filesystem_feature.inner'),
-            $this->getAbsoluteSkippedPaths($config, $container->getParameter('paths.base'))
+            new Reference('specifications.locator.filesystem_feature.skip_aware.inner'),
+            $this->getAbsoluteSkippedPaths($config['features'], $container->getParameter('paths.base'))
         ]);
 
-        $definition->setDecoratedService(
-            'specifications.locator.filesystem_feature',
-            'specifications.locator.filesystem_feature.inner'
-        );
+        $definition->setDecoratedService('specifications.locator.filesystem_feature');
+        $definition->setPublic(false);
 
         $container->setDefinition('specifications.locator.filesystem_feature.skip_aware', $definition);
     }
@@ -76,18 +74,15 @@ final class SkipExtension implements Extension
     }
 
     /**
-     * @param array $config
+     * @param array $skippedPaths
      * @param string $basePath
      *
      * @return array
      */
-    private function getAbsoluteSkippedPaths(array $config, $basePath)
+    private function getAbsoluteSkippedPaths(array $skippedPaths, $basePath)
     {
-        $skippedPaths = $config['features'];
-        foreach ($skippedPaths as $key => $skippedPath) {
-            $skippedPaths[$key] = $basePath.'/'.$skippedPath;
-        }
-
-        return $skippedPaths;
+        return array_map(function ($skippedPath) use ($basePath) {
+            return $basePath.'/'.$skippedPath;
+        }, $skippedPaths);
     }
 }

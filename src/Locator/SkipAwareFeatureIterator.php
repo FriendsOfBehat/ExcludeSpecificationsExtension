@@ -23,13 +23,13 @@ final class SkipAwareFeatureIterator extends \FilterIterator
 
     /**
      * @param \Iterator $iterator
-     * @param array $skipConfiguration
+     * @param array $skippedPaths
      */
-    public function __construct(\Iterator $iterator, array $skipConfiguration)
+    public function __construct(\Iterator $iterator, array $skippedPaths)
     {
         parent::__construct($iterator);
 
-        $this->skippedPaths = $skipConfiguration;
+        $this->skippedPaths = $skippedPaths;
     }
 
     /**

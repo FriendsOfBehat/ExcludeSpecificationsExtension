@@ -31,12 +31,12 @@ final class SkipAwareSpecificationLocator implements SpecificationLocator
 
     /**
      * @param SpecificationLocator $filesystemFeatureLocator
-     * @param array $skipConfiguration
+     * @param array $skippedPaths
      */
-    public function __construct(SpecificationLocator $filesystemFeatureLocator, array $skipConfiguration)
+    public function __construct(SpecificationLocator $filesystemFeatureLocator, array $skippedPaths)
     {
         $this->specificationLocator = $filesystemFeatureLocator;
-        $this->skippedPaths = $skipConfiguration;
+        $this->skippedPaths = $skippedPaths;
     }
 
     /**
