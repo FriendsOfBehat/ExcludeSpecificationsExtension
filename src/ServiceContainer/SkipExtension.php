@@ -13,7 +13,7 @@ namespace FriendsOfBehat\SkipExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use FriendsOfBehat\SkipExtension\Locator\SkipAwareFilesystemFeatureLocator;
+use FriendsOfBehat\SkipExtension\Locator\SkipAwareSpecificationLocator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -55,18 +55,17 @@ final class SkipExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $definition = new Definition(SkipAwareFilesystemFeatureLocator::class, [
-            new Reference('specifications.locator.filesystem_feature.decorated'),
-            $config['features'],
-            '%paths.base%',
+        $definition = new Definition(SkipAwareSpecificationLocator::class, [
+            new Reference('specifications.locator.filesystem_feature.inner'),
+            $this->getAbsoluteSkippedPaths($config, $container->getParameter('paths.base'))
         ]);
 
         $definition->setDecoratedService(
             'specifications.locator.filesystem_feature',
-            'specifications.locator.filesystem_feature.decorated'
+            'specifications.locator.filesystem_feature.inner'
         );
 
-        $container->setDefinition('specifications.locator.filesystem_feature.decorating', $definition);
+        $container->setDefinition('specifications.locator.filesystem_feature.skip_aware', $definition);
     }
 
     /**
@@ -74,5 +73,21 @@ final class SkipExtension implements Extension
      */
     public function process(ContainerBuilder $container)
     {
+    }
+
+    /**
+     * @param array $config
+     * @param string $basePath
+     *
+     * @return array
+     */
+    private function getAbsoluteSkippedPaths(array $config, $basePath)
+    {
+        $skippedPaths = $config['features'];
+        foreach ($skippedPaths as $key => $skippedPath) {
+            $skippedPaths[$key] = $basePath.'/'.$skippedPath;
+        }
+
+        return $skippedPaths;
     }
 }

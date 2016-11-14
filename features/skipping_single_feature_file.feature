@@ -43,7 +43,7 @@ Feature: Skipping single feature file
                 When I do nothing
         """
 
-    Scenario: Seeing information about skipped features
+    Scenario: Seeing proper number of passed scenarios
         When I run Behat
         Then it should pass with:
         """

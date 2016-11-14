@@ -13,38 +13,30 @@ namespace FriendsOfBehat\SkipExtension\Locator;
 
 use Behat\Testwork\Specification\Locator\SpecificationLocator;
 use Behat\Testwork\Suite\Suite;
-use FriendsOfBehat\SkipExtension\Iterator\SkipAwareFeatureIterator;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @internal
  */
-class SkipAwareFilesystemFeatureLocator implements SpecificationLocator
+final class SkipAwareSpecificationLocator implements SpecificationLocator
 {
     /**
      * @var SpecificationLocator
      */
-    private $filesystemFeatureLocator;
+    private $specificationLocator;
 
     /**
      * @var array
      */
-    private $skipConfiguration;
-
-    /**
-     * @var string
-     */
-    private $basePath;
+    private $skippedPaths;
 
     /**
      * @param SpecificationLocator $filesystemFeatureLocator
      * @param array $skipConfiguration
-     * @param string $basePath
      */
-    public function __construct(SpecificationLocator $filesystemFeatureLocator, array $skipConfiguration, $basePath)
+    public function __construct(SpecificationLocator $filesystemFeatureLocator, array $skipConfiguration)
     {
-        $this->filesystemFeatureLocator = $filesystemFeatureLocator;
-        $this->skipConfiguration = $skipConfiguration;
-        $this->basePath = $basePath;
+        $this->specificationLocator = $filesystemFeatureLocator;
+        $this->skippedPaths = $skipConfiguration;
     }
 
     /**
@@ -52,7 +44,7 @@ class SkipAwareFilesystemFeatureLocator implements SpecificationLocator
      */
     public function getLocatorExamples()
     {
-        return $this->filesystemFeatureLocator->getLocatorExamples();
+        return $this->specificationLocator->getLocatorExamples();
     }
 
     /**
@@ -61,9 +53,8 @@ class SkipAwareFilesystemFeatureLocator implements SpecificationLocator
     public function locateSpecifications(Suite $suite, $locator)
     {
         return new SkipAwareFeatureIterator(
-            $this->filesystemFeatureLocator->locateSpecifications($suite, $locator),
-            $this->skipConfiguration,
-            $this->basePath
+            $this->specificationLocator->locateSpecifications($suite, $locator),
+            $this->skippedPaths
         );
     }
 }
