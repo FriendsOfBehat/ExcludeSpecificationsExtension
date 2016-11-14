@@ -52,7 +52,7 @@ final class SkipAwareSpecificationLocator implements SpecificationLocator
      */
     public function locateSpecifications(Suite $suite, $locator)
     {
-        return new SkipAwareFeatureIterator(
+        return new SkipAwareSpecificationIterator(
             $this->specificationLocator->locateSpecifications($suite, $locator),
             $this->skippedPaths
         );

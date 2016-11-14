@@ -11,24 +11,32 @@
 
 namespace FriendsOfBehat\SkipExtension\Locator;
 
+use Behat\Testwork\Specification\SpecificationIterator;
+
 /**
  * @internal
  */
-final class SkipAwareFeatureIterator extends \FilterIterator
+final class SkipAwareSpecificationIterator extends \FilterIterator implements SpecificationIterator
 {
+    /**
+     * @var SpecificationIterator
+     */
+    private $specificationIterator;
+
     /**
      * @var array
      */
     private $skippedPaths;
 
     /**
-     * @param \Iterator $iterator
+     * @param SpecificationIterator $specificationIterator
      * @param array $skippedPaths
      */
-    public function __construct(\Iterator $iterator, array $skippedPaths)
+    public function __construct(SpecificationIterator $specificationIterator, array $skippedPaths)
     {
-        parent::__construct($iterator);
+        parent::__construct($specificationIterator);
 
+        $this->specificationIterator = $specificationIterator;
         $this->skippedPaths = $skippedPaths;
     }
 
@@ -42,5 +50,13 @@ final class SkipAwareFeatureIterator extends \FilterIterator
             $this->skippedPaths,
             true
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSuite()
+    {
+        return $this->specificationIterator->getSuite();
     }
 }
