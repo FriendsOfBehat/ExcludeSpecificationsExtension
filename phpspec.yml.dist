@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: FriendsOfBehat\SkipExtension
+        psr4_prefix: FriendsOfBehat\SkipExtension

@@ -15,7 +15,10 @@
         "symfony/dependency-injection": "^2.8|^3.0"
     },
     "require-dev": {
-        "friends-of-behat/test-context": "^0.2"
+        "friends-of-behat/test-context": "^0.2",
+        "phpspec/phpspec": "^3.1",
+
+        "doctrine/instantiator": "^1.0.5"
     },
     "autoload": {
         "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
