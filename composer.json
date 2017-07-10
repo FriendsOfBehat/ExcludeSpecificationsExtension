@@ -22,5 +22,8 @@
     },
     "autoload": {
         "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "spec\\FriendsOfBehat\\SkipExtension\\": "spec/" }
     }
 }
