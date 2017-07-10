@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "friends-of-behat/test-context": "^0.2",
-        "phpspec/phpspec": "^3.1",
+        "phpspec/phpspec": "^4.0@alpha",
 
         "doctrine/instantiator": "^1.0.5"
     },
