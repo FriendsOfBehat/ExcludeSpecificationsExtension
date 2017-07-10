@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SkipExtension package.
  *
@@ -12,6 +14,7 @@
 namespace FriendsOfBehat\SkipExtension\Locator;
 
 use Behat\Testwork\Specification\Locator\SpecificationLocator;
+use Behat\Testwork\Specification\SpecificationIterator;
 use Behat\Testwork\Suite\Suite;
 
 /**
@@ -42,7 +45,7 @@ final class SkipAwareSpecificationLocator implements SpecificationLocator
     /**
      * {@inheritdoc}
      */
-    public function getLocatorExamples()
+    public function getLocatorExamples(): array
     {
         return $this->specificationLocator->getLocatorExamples();
     }
@@ -50,7 +53,7 @@ final class SkipAwareSpecificationLocator implements SpecificationLocator
     /**
      * {@inheritdoc}
      */
-    public function locateSpecifications(Suite $suite, $locator)
+    public function locateSpecifications(Suite $suite, $locator): SpecificationIterator
     {
         return new SkipAwareSpecificationIterator(
             $this->specificationLocator->locateSpecifications($suite, $locator),

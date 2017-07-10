@@ -9,18 +9,21 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "behat/behat": "^3.1",
         "symfony/dependency-injection": "^2.8|^3.0"
     },
     "require-dev": {
         "friends-of-behat/test-context": "^0.2",
-        "phpspec/phpspec": "^3.1",
+        "phpspec/phpspec": "^4.0@alpha",
 
         "doctrine/instantiator": "^1.0.5"
     },
     "autoload": {
         "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "spec\\FriendsOfBehat\\SkipExtension\\": "spec/" }
     }
 }
