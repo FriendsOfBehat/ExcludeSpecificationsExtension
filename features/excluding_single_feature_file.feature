@@ -1,16 +1,16 @@
 Feature: Skipping single feature file
     In order to not run Behat feature which I don't want to be executed
     As a Behat User
-    I want to skip specific files
+    I want to exclude specific files
 
-    Background:
+    Scenario: Excluded features are not execuded
         Given a Behat configuration containing:
         """
         default:
             extensions:
-                FriendsOfBehat\SkipExtension:
+                FriendsOfBehat\ExcludeSpecificationsExtension:
                     features:
-                        - "features/skip.feature"
+                        - "features/excluded.feature"
         """
         And a context file "features/bootstrap/FeatureContext.php" containing:
         """
@@ -28,22 +28,20 @@ Feature: Skipping single feature file
             }
         }
         """
-        And a feature file "features/skip.feature" containing:
+        And a feature file "features/excluded.feature" containing:
         """
-        Feature: Feature to skip
+        Feature: Feature to exclude
 
             Scenario: Doing nothing
                 When I do nothing
         """
-        And a feature file "features/run.feature" containing:
+        And a feature file "features/not_excluded.feature" containing:
         """
-        Feature: Feature to run
+        Feature: Feature not to exclude
 
             Scenario: Doing nothing
                 When I do nothing
         """
-
-    Scenario: Seeing proper number of passed scenarios
         When I run Behat
         Then it should pass with:
         """

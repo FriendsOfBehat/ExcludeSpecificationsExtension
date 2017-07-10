@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the SkipExtension package.
+ * This file is part of the ExcludeSpecificationsExtension package.
  *
  * (c) Kamil Kokot <kamil@kokot.me>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace FriendsOfBehat\SkipExtension\Locator;
+namespace FriendsOfBehat\ExcludeSpecificationsExtension\Locator;
 
 use Behat\Testwork\Specification\SpecificationIterator;
 use Behat\Testwork\Suite\Suite;
@@ -19,7 +19,7 @@ use Behat\Testwork\Suite\Suite;
 /**
  * @internal
  */
-final class SkipAwareSpecificationIterator extends \FilterIterator implements SpecificationIterator
+final class ExcludingSpecificationIterator extends \FilterIterator implements SpecificationIterator
 {
     /**
      * @var SpecificationIterator

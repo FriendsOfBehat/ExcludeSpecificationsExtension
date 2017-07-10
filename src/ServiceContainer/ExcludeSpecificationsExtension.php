@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the SkipExtension package.
+ * This file is part of the ExcludeSpecificationsExtension package.
  *
  * (c) Kamil Kokot <kamil@kokot.me>
  *
@@ -11,24 +11,24 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace FriendsOfBehat\SkipExtension\ServiceContainer;
+namespace FriendsOfBehat\ExcludeSpecificationsExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use FriendsOfBehat\SkipExtension\Locator\SkipAwareSpecificationLocator;
+use FriendsOfBehat\ExcludeSpecificationsExtension\Locator\ExcludingSpecificationLocator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-final class SkipExtension implements Extension
+final class ExcludeSpecificationsExtension implements Extension
 {
     /**
      * {@inheritdoc}
      */
     public function getConfigKey(): string
     {
-        return 'fob_skip';
+        return 'fob_exclude_specifications';
     }
 
     /**
@@ -58,15 +58,15 @@ final class SkipExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config): void
     {
-        $definition = new Definition(SkipAwareSpecificationLocator::class, [
-            new Reference('specifications.locator.filesystem_feature.skip_aware.inner'),
+        $definition = new Definition(ExcludingSpecificationLocator::class, [
+            new Reference('specifications.locator.filesystem_feature.excluding.inner'),
             $this->getAbsoluteSkippedPaths($config['features'], $container->getParameter('paths.base'))
         ]);
 
         $definition->setDecoratedService('specifications.locator.filesystem_feature');
         $definition->setPublic(false);
 
-        $container->setDefinition('specifications.locator.filesystem_feature.skip_aware', $definition);
+        $container->setDefinition('specifications.locator.filesystem_feature.excluding', $definition);
     }
 
     /**

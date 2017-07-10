@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the SkipExtension package.
+ * This file is part of the ExcludeSpecificationsExtension package.
  *
  * (c) Kamil Kokot <kamil@kokot.me>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace spec\FriendsOfBehat\SkipExtension\Locator;
+namespace spec\FriendsOfBehat\ExcludeSpecificationsExtension\Locator;
 
 use Behat\Testwork\Specification\SpecificationIterator;
 use PhpSpec\ObjectBehavior;
 
-final class SkipAwareSpecificationIteratorSpec extends ObjectBehavior
+final class ExcludingSpecificationIteratorSpec extends ObjectBehavior
 {
     function let(SpecificationIterator $specificationIterator): void
     {
