@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SkipExtension package.
  *
@@ -16,12 +18,12 @@ use PhpSpec\ObjectBehavior;
 
 final class SkipAwareSpecificationIteratorSpec extends ObjectBehavior
 {
-    function let(SpecificationIterator $specificationIterator)
+    function let(SpecificationIterator $specificationIterator): void
     {
         $this->beConstructedWith($specificationIterator, []);
     }
 
-    function it_is_a_specification_iterator()
+    function it_is_a_specification_iterator(): void
     {
         $this->shouldImplement(SpecificationIterator::class);
     }

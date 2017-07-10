@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SkipExtension package.
  *
@@ -24,7 +26,7 @@ final class SkipExtension implements Extension
     /**
      * {@inheritdoc}
      */
-    public function getConfigKey()
+    public function getConfigKey(): string
     {
         return 'fob_skip';
     }
@@ -32,20 +34,21 @@ final class SkipExtension implements Extension
     /**
      * {@inheritdoc}
      */
-    public function initialize(ExtensionManager $extensionManager)
+    public function initialize(ExtensionManager $extensionManager): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configure(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder): void
     {
         $builder
             ->children()
                 ->arrayNode('features')
                     ->performNoDeepMerging()
-                    ->prototype('scalar')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
         ;
     }
@@ -53,7 +56,7 @@ final class SkipExtension implements Extension
     /**
      * {@inheritdoc}
      */
-    public function load(ContainerBuilder $container, array $config)
+    public function load(ContainerBuilder $container, array $config): void
     {
         $definition = new Definition(SkipAwareSpecificationLocator::class, [
             new Reference('specifications.locator.filesystem_feature.skip_aware.inner'),
@@ -69,7 +72,7 @@ final class SkipExtension implements Extension
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
     }
 
@@ -79,10 +82,10 @@ final class SkipExtension implements Extension
      *
      * @return array
      */
-    private function getAbsoluteSkippedPaths(array $skippedPaths, $basePath)
+    private function getAbsoluteSkippedPaths(array $skippedPaths, string $basePath): array
     {
-        return array_map(function ($skippedPath) use ($basePath) {
-            return $basePath.'/'.$skippedPath;
+        return array_map(function (string $skippedPath) use ($basePath): string {
+            return $basePath . '/' . $skippedPath;
         }, $skippedPaths);
     }
 }
