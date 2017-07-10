@@ -1,6 +1,6 @@
 {
-    "name": "friends-of-behat/skip-extension",
-    "description": "Allows to skip features and scenarios in Behat tests.",
+    "name": "friends-of-behat/exclude-specifications-extension",
+    "description": "Allows to exclude features or scenarios in Behat tests.",
     "license": "MIT",
     "authors": [
         {
@@ -16,14 +16,12 @@
     },
     "require-dev": {
         "friends-of-behat/test-context": "^1.0",
-        "phpspec/phpspec": "^4.0@alpha",
-
-        "doctrine/instantiator": "^1.0.5"
+        "phpspec/phpspec": "^4.0@alpha"
     },
     "autoload": {
-        "psr-4": { "FriendsOfBehat\\SkipExtension\\": "src/" }
+        "psr-4": { "FriendsOfBehat\\ExcludeSpecificationsExtension\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4" : { "spec\\FriendsOfBehat\\SkipExtension\\": "spec/" }
+        "psr-4" : { "spec\\FriendsOfBehat\\ExcludeSpecificationsExtension\\": "spec/" }
     }
 }
