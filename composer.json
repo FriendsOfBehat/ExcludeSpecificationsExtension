@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "friends-of-behat/test-context": "^1.0",
-        "phpspec/phpspec": "^4.0@alpha"
+        "phpspec/phpspec": "^4.0"
     },
     "autoload": {
         "psr-4": { "FriendsOfBehat\\ExcludeSpecificationsExtension\\": "src/" }
