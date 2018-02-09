@@ -60,7 +60,7 @@ final class ExcludeSpecificationsExtension implements Extension
     {
         $definition = new Definition(ExcludingSpecificationLocator::class, [
             new Reference('specifications.locator.filesystem_feature.excluding.inner'),
-            $this->getAbsoluteSkippedPaths($config['features'], $container->getParameter('paths.base'))
+            $config['features']
         ]);
 
         $definition->setDecoratedService('specifications.locator.filesystem_feature');
@@ -74,18 +74,5 @@ final class ExcludeSpecificationsExtension implements Extension
      */
     public function process(ContainerBuilder $container): void
     {
-    }
-
-    /**
-     * @param array $skippedPaths
-     * @param string $basePath
-     *
-     * @return array
-     */
-    private function getAbsoluteSkippedPaths(array $skippedPaths, string $basePath): array
-    {
-        return array_map(function (string $skippedPath) use ($basePath): string {
-            return $basePath . '/' . $skippedPath;
-        }, $skippedPaths);
     }
 }
