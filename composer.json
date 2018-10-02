@@ -11,12 +11,12 @@
     "require": {
         "php": "^7.1",
 
-        "behat/behat": "^3.1",
-        "symfony/dependency-injection": "^2.8|^3.0"
+        "behat/behat": "^3.4",
+        "symfony/dependency-injection": "^3.4|^4.1"
     },
     "require-dev": {
-        "friends-of-behat/test-context": "^1.0",
-        "phpspec/phpspec": "^4.0"
+        "friends-of-behat/test-context": "^1.1",
+        "phpspec/phpspec": "^5.0"
     },
     "autoload": {
         "psr-4": { "FriendsOfBehat\\ExcludeSpecificationsExtension\\": "src/" }
