@@ -2,22 +2,22 @@ language: php
 
 php:
     - 7.1
-    - nightly
+    - 7.2
 
-matrix:
-    allow_failures:
-        - php: nightly
-    fast_finish: true
+env:
+    - SYMFONY_VERSION="3.4.*"
+    - SYMFONY_VERSION="4.1.*"
 
 cache:
     directories:
-        - vendor
+        - ~/.composer/cache/files
 
 before_install:
     - phpenv config-rm xdebug.ini || true
 
 install:
-    - composer update --prefer-dist
+    - composer require symfony/dependency-injection:${SYMFONY_VERSION} --no-update --no-interaction
+    - composer update --prefer-dist --no-interaction
 
 script:
     - composer validate --strict
