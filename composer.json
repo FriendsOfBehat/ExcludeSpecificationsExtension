@@ -23,5 +23,14 @@
     },
     "autoload-dev": {
         "psr-4" : { "spec\\FriendsOfBehat\\ExcludeSpecificationsExtension\\": "spec/" }
+    },
+    "scripts": {
+        "analyse": [
+            "@composer validate --ansi --strict"
+        ],
+        "test": [
+            "vendor/bin/phpspec run --format dot -vvv --no-interaction",
+            "vendor/bin/behat -f progress --strict -vvv --no-interaction --colors"
+        ]
     }
 }
