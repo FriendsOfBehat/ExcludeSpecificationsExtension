@@ -48,11 +48,14 @@ final class ExcludingSpecificationIterator extends \FilterIterator implements Sp
      */
     public function accept(): bool
     {
-        return !in_array(
-            $this->current()->getFile(),
-            $this->skippedPaths,
-            true
-        );
+        foreach ($this->skippedPaths as $skippedPath) {
+            $files[$skippedPath] = strpos($this->current()->getFile(), $skippedPath);
+            if (false !== strpos($this->current()->getFile(), $skippedPath)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
