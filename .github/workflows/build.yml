@@ -42,6 +42,10 @@ jobs:
                     composer config minimum-stability "dev"
                     composer config prefer-stable true
 
+            -   name: Remove Phpspec
+                if: ${{ contains( matrix.symfony, '6.0.*' ) }}
+                run: composer remove --dev phpspec/phpspec --no-update
+
             -
                 name: Install dependencies
                 run: composer update
@@ -51,5 +55,10 @@ jobs:
                 run: composer analyse
 
             -
-                name: Run tests
-                run: composer test
+                name: Run phpspec
+                if: ${{ true != contains( matrix.symfony, '6.0.*' ) }}
+                run: vendor/bin/phpspec run --format dot -vvv --no-interaction
+
+            -
+                name: Run Behat
+                run: vendor/bin/behat -f progress --strict -vvv --no-interaction --colors
