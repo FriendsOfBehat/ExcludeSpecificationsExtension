@@ -16,8 +16,11 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["7.3", "7.4", "8.0"]
-                symfony: ["4.4.*", "5.1.*"]
+                php: ["7.4", "8.0", "8.1"]
+                symfony: ["5.3.*", "5.4.*", "6.0.*"]
+                exclude:
+                    - symfony: "6.0.*"
+                      php: "7.4"
 
         steps:
             -
@@ -31,10 +34,17 @@ jobs:
                     coverage: none
 
             -
-                name: Update Symfony version
+                name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer require symfony/dependency-injection:${{ matrix.symfony }} --no-update --no-scripts
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+                    composer config minimum-stability "dev"
+                    composer config prefer-stable true
+
+            -   name: Remove Phpspec
+                if: ${{ contains( matrix.symfony, '6.0.*' ) }}
+                run: composer remove --dev phpspec/phpspec --no-update
 
             -
                 name: Install dependencies
@@ -45,5 +55,10 @@ jobs:
                 run: composer analyse
 
             -
-                name: Run tests
-                run: composer test
+                name: Run phpspec
+                if: ${{ true != contains( matrix.symfony, '6.0.*' ) }}
+                run: vendor/bin/phpspec run --format dot -vvv --no-interaction
+
+            -
+                name: Run Behat
+                run: vendor/bin/behat -f progress --strict -vvv --no-interaction --colors
