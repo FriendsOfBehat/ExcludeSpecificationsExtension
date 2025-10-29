@@ -1,3 +1,4 @@
+/.github export-ignore
 /features export-ignore
 /spec export-ignore
 
@@ -5,3 +6,4 @@
 /.gitignore export-ignore
 /.travis.yml export-ignore
 /behat.yml.dist export-ignore
+/phpspec.yml.dist export-ignore
